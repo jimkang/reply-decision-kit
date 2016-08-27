@@ -25,7 +25,16 @@ Usage
         console.log('Did not reply because', error.message);
       }
       else {
-        replyToTweet(tweet, 'Hey guy!', kit.recordThatReplyHappened);
+        replyToTweet(tweet, 'Hey guy!', tweetDone);
+      }
+    }
+
+    function tweetDone(error, replyData, done) {
+      if (error) {
+        console.log(error);
+      }
+      else {
+        kit.recordThatReplyHappened(tweet, done);
       }
     }
 

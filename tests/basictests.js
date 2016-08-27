@@ -3,6 +3,7 @@
 var test = require('tape');
 var ReplyDecisionKit = require('../index');
 var queue = require('d3-queue').queue;
+var rimraf = require('rimraf');
 
 var username = 'testbot';
 
@@ -41,8 +42,11 @@ var testCasesInOrder = [
   }
 ];
 
+var kitDbPath = __dirname + '/test.db';
+rimraf.sync(kitDbPath);
+
 var kit = ReplyDecisionKit({
-  kitDbPath: __dirname + '/test.db',
+  kitDbPath: kitDbPath,
   username: username,
   hoursToWaitBetweenRepliesToSameUser: 1
 });
@@ -58,13 +62,12 @@ function queueTest(testCase) {
     test(testCase.name, basicTest);
 
     function basicTest(t) {
-      debugger;
       kit.shouldReplyToTweet(testCase.tweet, checkAnswer);
 
       function checkAnswer(error) {        
         t.equal(!error, testCase.shouldReply, 'shouldReply is correct.');
         if (!error) {
-          kit.recordThatReplyHappened(testCase.tweet, null, endTest);
+          kit.recordThatReplyHappened(testCase.tweet, endTest);
         }
         else {
           endTest();

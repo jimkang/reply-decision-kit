@@ -16,8 +16,8 @@ function ReplyDecisionKit(opts) {
     dbLocation: kitDbPath
   });
 
-  function recordThatReplyHappened(tweetData, response, done) {
-    var userId = tweetData.user.id_str;
+  function recordThatReplyHappened(tweet, done) {
+    var userId = tweet.user.id_str;
     chronicler.recordThatUserWasRepliedTo(userId, done);
   }
 

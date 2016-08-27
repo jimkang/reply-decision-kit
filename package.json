@@ -24,6 +24,7 @@
   "devDependencies": {
     "d3-queue": "^3.0.3",
     "eslint": "^3.3.1",
+    "rimraf": "^2.5.4",
     "tape": "^4.6.0"
   },
   "dependencies": {
