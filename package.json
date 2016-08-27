@@ -1,6 +1,6 @@
 {
   "name": "reply-decision-kit",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A recordkeeping kit that helps Twitter bots decide whether they should reply to a given tweet or not.",
   "main": "index.js",
   "scripts": {
