@@ -3,12 +3,12 @@ var betterKnowATweet = require('better-know-a-tweet');
 
 function ShouldReplyToTweet(createOpts) {
   var username;
-  var hoursToWaitBetweenRepliesToSameUser;
+  var secondsToWaitBetweenRepliesToSameUser;
   var chronicler;
 
   if (createOpts) {
     username = createOpts.username;
-    hoursToWaitBetweenRepliesToSameUser = createOpts.hoursToWaitBetweenRepliesToSameUser;
+    secondsToWaitBetweenRepliesToSameUser = createOpts.secondsToWaitBetweenRepliesToSameUser;
     chronicler = createOpts.chronicler;
   }
 
@@ -54,15 +54,16 @@ function ShouldReplyToTweet(createOpts) {
       if (typeof date !== 'object') {
         date = new Date(date);
       }
-      var hoursElapsed = (Date.now() - date.getTime()) / (60 * 60 * 1000);
+      var secondsElapsed = (Date.now() - date.getTime()) / 1000;
 
-      if (hoursElapsed > hoursToWaitBetweenRepliesToSameUser) {
+      if (secondsElapsed > secondsToWaitBetweenRepliesToSameUser) {
         done();
       }
       else {
+        var hoursElapsed = secondsElapsed/3600;
         done(new Error(
           `Replied ${hoursElapsed} hours ago to ${tweet.user.screen_name}.
-          Need at least ${hoursToWaitBetweenRepliesToSameUser} to pass.`
+          Need at least ${secondsToWaitBetweenRepliesToSameUser/3600} hours to pass.`
         ));
       }
     }

@@ -15,7 +15,7 @@ Usage
     var kit = ReplyDecisionKit({
       kitDbPath: __dirname + '/reply-records.db',
       username: 'thegreatbot',
-      hoursToWaitBetweenRepliesToSameUser: 10
+      secondsToWaitBetweenRepliesToSameUser: 60 * 15
     });
 
     kit.shouldReplyToTweet(tweet, checkAnswer);

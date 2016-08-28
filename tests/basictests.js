@@ -48,7 +48,7 @@ rimraf.sync(kitDbPath);
 var kit = ReplyDecisionKit({
   kitDbPath: kitDbPath,
   username: username,
-  hoursToWaitBetweenRepliesToSameUser: 1
+  secondsToWaitBetweenRepliesToSameUser: 60
 });
 
 var q = queue(1);

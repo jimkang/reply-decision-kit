@@ -5,11 +5,17 @@ function ReplyDecisionKit(opts) {
   var kitDbPath;
   var username;
   var hoursToWaitBetweenRepliesToSameUser;
+  var secondsToWaitBetweenRepliesToSameUser;
 
   if (opts) {
     kitDbPath = opts.kitDbPath;
     username = opts.username;
     hoursToWaitBetweenRepliesToSameUser = opts.hoursToWaitBetweenRepliesToSameUser;    
+    secondsToWaitBetweenRepliesToSameUser = opts.secondsToWaitBetweenRepliesToSameUser;
+  }
+
+  if (!secondsToWaitBetweenRepliesToSameUser && hoursToWaitBetweenRepliesToSameUser) {
+    secondsToWaitBetweenRepliesToSameUser = hoursToWaitBetweenRepliesToSameUser * 3600;
   }
 
   var chronicler = Chronicler({
@@ -23,7 +29,7 @@ function ReplyDecisionKit(opts) {
 
   var shouldReplyToTweet = ShouldReplyToTweet({
     username: username,
-    hoursToWaitBetweenRepliesToSameUser: hoursToWaitBetweenRepliesToSameUser,
+    secondsToWaitBetweenRepliesToSameUser: secondsToWaitBetweenRepliesToSameUser,
     chronicler: chronicler
   });
 
