@@ -38,6 +38,8 @@ Usage
       }
     }
 
+By default, it will say that you shouldn't reply to tweets that don't mention you. You can pass the `mustMentionSelf` option with false to change this behavior.
+
 Tests
 -----
 

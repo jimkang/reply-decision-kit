@@ -5,11 +5,13 @@ function ShouldReplyToTweet(createOpts) {
   var username;
   var secondsToWaitBetweenRepliesToSameUser;
   var chronicler;
+  var mustMentionSelf;
 
   if (createOpts) {
     username = createOpts.username;
     secondsToWaitBetweenRepliesToSameUser = createOpts.secondsToWaitBetweenRepliesToSameUser;
     chronicler = createOpts.chronicler;
+    mustMentionSelf = createOpts.mustMentionSelf;
   }
 
   return shouldReplyToTweet;
@@ -26,7 +28,7 @@ function ShouldReplyToTweet(createOpts) {
       return;
     }
 
-    if (!doesTweetMentionBot(tweet)) {
+    if (mustMentionSelf && !doesTweetMentionBot(tweet)) {
       callNextTick(done, new Error('Not mentioned; not replying.'));
       return;
     }

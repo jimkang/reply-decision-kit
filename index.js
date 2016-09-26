@@ -6,12 +6,19 @@ function ReplyDecisionKit(opts) {
   var username;
   var hoursToWaitBetweenRepliesToSameUser;
   var secondsToWaitBetweenRepliesToSameUser;
+  var mustMentionSelf;
 
   if (opts) {
     kitDbPath = opts.kitDbPath;
     username = opts.username;
     hoursToWaitBetweenRepliesToSameUser = opts.hoursToWaitBetweenRepliesToSameUser;    
     secondsToWaitBetweenRepliesToSameUser = opts.secondsToWaitBetweenRepliesToSameUser;
+    mustMentionSelf = opts.mustMentionSelf;
+  }
+
+  if (mustMentionSelf === undefined) {
+    // Default to true.
+    mustMentionSelf = true;
   }
 
   if (!secondsToWaitBetweenRepliesToSameUser && hoursToWaitBetweenRepliesToSameUser) {
@@ -30,7 +37,8 @@ function ReplyDecisionKit(opts) {
   var shouldReplyToTweet = ShouldReplyToTweet({
     username: username,
     secondsToWaitBetweenRepliesToSameUser: secondsToWaitBetweenRepliesToSameUser,
-    chronicler: chronicler
+    chronicler: chronicler,
+    mustMentionSelf: mustMentionSelf
   });
 
   return {
