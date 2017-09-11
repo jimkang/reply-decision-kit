@@ -40,6 +40,8 @@ Usage
 
 By default, it will say that you shouldn't reply to tweets that don't mention you. You can pass the `mustMentionSelf` option with false to change this behavior.
 
+You can also pass a username in the `alwaysRespondToMentionsFrom` opt to have it skip checking how recently it replied to a particular user and always decide it should respond to that user. 
+
 Tests
 -----
 

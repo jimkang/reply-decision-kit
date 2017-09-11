@@ -7,6 +7,7 @@ function ReplyDecisionKit(opts) {
   var hoursToWaitBetweenRepliesToSameUser;
   var secondsToWaitBetweenRepliesToSameUser;
   var mustMentionSelf;
+  var alwaysRespondToMentionsFrom;
 
   if (opts) {
     kitDbPath = opts.kitDbPath;
@@ -14,6 +15,7 @@ function ReplyDecisionKit(opts) {
     hoursToWaitBetweenRepliesToSameUser = opts.hoursToWaitBetweenRepliesToSameUser;    
     secondsToWaitBetweenRepliesToSameUser = opts.secondsToWaitBetweenRepliesToSameUser;
     mustMentionSelf = opts.mustMentionSelf;
+    alwaysRespondToMentionsFrom = opts.alwaysRespondToMentionsFrom;
   }
 
   if (mustMentionSelf === undefined) {
@@ -38,7 +40,8 @@ function ReplyDecisionKit(opts) {
     username: username,
     secondsToWaitBetweenRepliesToSameUser: secondsToWaitBetweenRepliesToSameUser,
     chronicler: chronicler,
-    mustMentionSelf: mustMentionSelf
+    mustMentionSelf: mustMentionSelf,
+    alwaysRespondToMentionsFrom: alwaysRespondToMentionsFrom
   });
 
   return {

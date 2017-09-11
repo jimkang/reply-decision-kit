@@ -39,6 +39,39 @@ var testCasesInOrder = [
       text: '@testbot I have another question!'
     },
     shouldReply: false
+  },
+  {
+    name: 'From special user, message 1',
+    tweet: {
+      user: {
+        screen_name: 'specialuser',
+        id_str: '33333333'
+      },
+      text: '@testbot Hello!'
+    },
+    shouldReply: true
+  },
+  {
+    name: 'From special user, message 2',
+    tweet: {
+      user: {
+        screen_name: 'specialuser',
+        id_str: '33333333'
+      },
+      text: '@testbot Hello again!'
+    },
+    shouldReply: true
+  },
+  {
+    name: 'From special user, does not mention bot.',
+    tweet: {
+      user: {
+        screen_name: 'specialuser',
+        id_str: '33333333'
+      },
+      text: 'Just talkin\'.'
+    },
+    shouldReply: false
   }
 ];
 
@@ -48,7 +81,9 @@ rimraf.sync(kitDbPath);
 var kit = ReplyDecisionKit({
   kitDbPath: kitDbPath,
   username: username,
-  secondsToWaitBetweenRepliesToSameUser: 60
+  secondsToWaitBetweenRepliesToSameUser: 60,
+  mustMensionSelf: true,
+  alwaysRespondToMentionsFrom: 'specialuser'
 });
 
 var q = queue(1);
